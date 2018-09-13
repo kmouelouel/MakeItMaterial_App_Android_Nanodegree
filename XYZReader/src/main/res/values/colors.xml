@@ -16,6 +16,20 @@
 -->
 
 <resources>
+    <!--Primaries-->
+    <color name="primary">#009688</color>
+    <color name="primaryDark">#00695C</color>
+    <color name="primaryLight">#4DB6AC</color>
+
+    <!--ArticleDetails-->
+    <color name="detail_title">#FFF</color>
+    <color name="article_byline">#8FFF</color>
+    <color name="article_body_text">#000000</color>
+
+
+
+
+    <color name="statusBar">#FF2196F3</color>
     <color name="photo_placeholder">#ccc</color>
 
     <color name="theme_primary">#04561A</color>

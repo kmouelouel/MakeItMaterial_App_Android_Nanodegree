@@ -1,3 +1,4 @@
+
 <!-- File created by the Android Action Bar Style Generator
 
      Copyright (C) 2012 readyState Software Ltd
@@ -18,11 +19,10 @@
 <resources>
 
     <style name="Theme.Bacon" parent="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <item name="actionBarSize">46dp</item>
     </style>
 
     <style name="Theme.Bacon.Detail">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+         </style>
 
 </resources>
