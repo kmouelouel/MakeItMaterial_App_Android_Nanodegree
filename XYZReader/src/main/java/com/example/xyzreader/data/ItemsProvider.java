@@ -1,4 +1,3 @@
-
 package com.example.xyzreader.data;
 
 import android.content.ContentProvider;
@@ -37,7 +36,7 @@ public class ItemsProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-        mOpenHelper = new ItemsDatabase(getContext());
+		mOpenHelper = new ItemsDatabase(getContext());
 		return true;
 	}
 
@@ -59,10 +58,10 @@ public class ItemsProvider extends ContentProvider {
 		final SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 		final SelectionBuilder builder = buildSelection(uri);
 		Cursor cursor = builder.where(selection, selectionArgs).query(db, projection, sortOrder);
-        if (cursor != null) {
-            cursor.setNotificationUri(getContext().getContentResolver(), uri);
-        }
-        return cursor;
+		if (cursor != null) {
+			cursor.setNotificationUri(getContext().getContentResolver(), uri);
+		}
+		return cursor;
 	}
 
 	@Override
@@ -72,7 +71,7 @@ public class ItemsProvider extends ContentProvider {
 		switch (match) {
 			case ITEMS: {
 				final long _id = db.insertOrThrow(Tables.ITEMS, null, values);
-                getContext().getContentResolver().notifyChange(uri, null);
+				getContext().getContentResolver().notifyChange(uri, null);
 				return ItemsContract.Items.buildItemUri(_id);
 			}
 			default: {
@@ -85,7 +84,7 @@ public class ItemsProvider extends ContentProvider {
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		final SelectionBuilder builder = buildSelection(uri);
-        getContext().getContentResolver().notifyChange(uri, null);
+		getContext().getContentResolver().notifyChange(uri, null);
 		return builder.where(selection, selectionArgs).update(db, values);
 	}
 
@@ -93,7 +92,7 @@ public class ItemsProvider extends ContentProvider {
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		final SelectionBuilder builder = buildSelection(uri);
-        getContext().getContentResolver().notifyChange(uri, null);
+		getContext().getContentResolver().notifyChange(uri, null);
 		return builder.where(selection, selectionArgs).delete(db);
 	}
 
@@ -119,25 +118,25 @@ public class ItemsProvider extends ContentProvider {
 		}
 	}
 
-    /**
-     * Apply the given set of {@link ContentProviderOperation}, executing inside
-     * a {@link SQLiteDatabase} transaction. All changes will be rolled back if
-     * any single one fails.
-     */
-    public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations)
-            throws OperationApplicationException {
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        db.beginTransaction();
-        try {
-            final int numOperations = operations.size();
-            final ContentProviderResult[] results = new ContentProviderResult[numOperations];
-            for (int i = 0; i < numOperations; i++) {
-                results[i] = operations.get(i).apply(this, results, i);
-            }
-            db.setTransactionSuccessful();
-            return results;
-        } finally {
-            db.endTransaction();
-        }
-    }
+	/**
+	 * Apply the given set of {@link ContentProviderOperation}, executing inside
+	 * a {@link SQLiteDatabase} transaction. All changes will be rolled back if
+	 * any single one fails.
+	 */
+	public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations)
+			throws OperationApplicationException {
+		final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		db.beginTransaction();
+		try {
+			final int numOperations = operations.size();
+			final ContentProviderResult[] results = new ContentProviderResult[numOperations];
+			for (int i = 0; i < numOperations; i++) {
+				results[i] = operations.get(i).apply(this, results, i);
+			}
+			db.setTransactionSuccessful();
+			return results;
+		} finally {
+			db.endTransaction();
+		}
+	}
 }
